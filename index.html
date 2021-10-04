@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Trigometrie Rechner</title>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    
+    <body>
+        <main id="main">
+            <div class="ergebniss">
+                <div class="erg">
+                    <!-- &alpha;&beta;&gamma; abc -->
+                   <details>
+                    <summary id="erg-winkel-a"></summary>
+                    <p id="erg-winkel-a-rechnung"></p>
+                </details>
+                <details>
+                    <summary id="erg-winkel-b"></summary>
+                    <p id="erg-winkel-b-rechnung"></p>
+                </details>
+                <details>
+                    <summary id="erg-winkel-c"></summary>
+                    <p id="erg-winkel-c-rechnung"></p>
+                </details>
+                <details>
+                    <summary id="erg-kathete-a"></summary>
+                    <p id="erg-kathete-a-rechnung"></p>
+                </details>
+                <details>
+                    <summary id="erg-kathete-b"></summary>
+                    <p id="erg-kathete-b-rechnung"></p>
+                </details>
+                <details>
+                    <summary id="erg-hypotenuse-c"></summary>
+                    <p id="erg-hypotenuse-c-rechnung"></p>
+                </details>       
+                </div>
+                <div id="dreieckHandler"></div>
+            </div>
+            <div class="eingabe">
+                <table>
+                    <th>
+                        <td>Winkel</td>
+                    </th>
+                    <tr>
+                        <td>
+                            <label>&alpha;</label>
+                        </td>
+                        <td>
+                            <input id="winkel-a" type="number" name="winkel-a" value="" placeholder="&alpha;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>&beta;</label>
+                        </td>
+                        <td>
+                            <input id="winkel-b" type="number" name="winkel-b" value="" placeholder="&beta;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>&gamma;</label>
+                        </td>
+                        <td>
+                            <input id="winkel-c" type="number" name="winkel-c" value="90" placeholder="&gamma;"/>
+                        </td>
+                    </tr>
+
+                    <th>
+                        <td>Seiten</td>
+                    </th>
+                    <tr>
+                        <td>
+                            <label>a</label>
+                        </td>
+                        <td>
+                            <input id="kathete-a" type="number" name="kathete-a" value="" placeholder="a"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>b</label>
+                        </td>
+                        <td>
+                            <input id="kathete-b" type="number" name="kathete-a" value="" placeholder="b"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>c</label>
+                        </td>
+                        <td>
+                            <input id="hypotenuse-c" type="number" name="kathete-a" value="" placeholder="c"/>
+                        </td>
+                    </tr>       
+                    <p id="legend"></p>W. = Winkel <br/>K. = Kathete<br/>H. = Hypotenuse</p>
+                </table>
+                <button onclick="calc.Start()" >Calc</button>
+            </div>
+        </main>
+        <script src="test.js"></script>
+    </body>
+    </html>
