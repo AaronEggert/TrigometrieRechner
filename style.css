@@ -1,56 +1,233 @@
+@media screen and (min-width: 1024px) and (min-height: 600px) {
+    #toggleShow {
+        display: none;
+    }
+    
+    
+    main {
+        margin: 0;
+        padding: 0;
+        display: block;
+        width:100%;
+        height:100%;
+    }
+    
+    .ergebniss {
+        position:fixed;
+        display:flex;
+        left:0;
+        top:0;
+        height: calc(100% - 10px - 30px - 0px);
+        width: calc(100% - 10px - 30px - 35px - 21% - 5px);
+        margin:5px; 
+        padding:15px;     
+        background-color: rgba(0, 139, 139, 1);
+        font-size:150%;
+        color: #fff;
+        border-radius: 5px;
+        overflow: scroll;
+        overflow-x: hidden;
+        
+        
+    }
+    .ergebniss * {
+        font-size: 110%;
+    }
+    .item {
+        width: 50%;
+    }
+    canvas { 
+        position:fixed;
+    }
+
+    .ergebniss::-webkit-scrollbar {
+        /* background: transparent; */
+        opacity:0;
+        width: 7px;
+        
+    }
+    .ergebniss::-webkit-scrollbar:hover{
+        opacity: 1;
+    }
+    .ergebniss:hover::-webkit-scrollbar-thumb{
+        background: rgba(255,255,255,0.5);
+        /* border-top-right-radius: 85px;
+        border-bottom-right-radius: 85px; */
+        border-radius: 50px;
+    }
+    
+    .eingabe {
+        background-color: rgba(46,139,77,1);
+        position:fixed;
+        right:0;
+        top:0;
+        height: calc(100% - 10px - 50px - 0px);
+        width: 20%;
+        margin:5px; 
+        padding:25px;     
+    
+        font-size:150%;
+        color: #fff;
+    
+        border-radius: 5px;
+        float: right;
+    }
+    
+    .eingabe * {
+        right:0;
+        position:sticky;
+    }
+    
+    .eingabe input {
+        margin-top:10px;
+        float: right;
+        height: 30px;
+        width: 70px;
+    }
+
+    .eingabe-titel {
+        margin-top:20px;
+
+        font-weight: bold;
+    }
+    
+    .eingabe label {
+        float: left;
+        height:20px;
+        padding:5px;
+    }
+    
+    Button {
+        padding: 10px 20px;
+        margin-top:20px;
+        color: #fff;
+        background:none;
+    }
+    
+    
+    input {
+        border: none;
+        border-radius: 7px;
+        text-align: center;
+        font-size: 120%;
+    }
+    input:focus {   
+        border:none;
+        outline:none;
+        background-color: rgba(255,255,255,0.8);
+    }   
+    input::placeholder {
+        color: green;
+        text-align: center;
+        /* font-size: 150%; */
+    } 
+}    
+@media screen and (min-width: 425px) and (max-width: 1024px) and (min-height: 600px) {
+    .erg {
+        margin: 0 0 0 30px;
+    }
+    
+    .eingabe {
+        background-color:rgba(0, 139, 139, 1);
+        color: #fff;
+        position: fixed;
+        top:calc( (100% - 75% - 100px) / 2 );
+        left:0px;
+        height: 75%;
+        width:60%;
+        padding: 35px 60px 60px 15px;
+        font-size:150%;
+        /* margin-left: calc((50% + 100 px) * -1); */
+    }
+
+    #toggleShow {
+        width: 5%;
+        height: 100%;
+        background-color:rgb(3, 78, 78);
+        z-index: 999;
+        position: absolute;
+        top:0;
+        right: 0;
+    }
+
+    #toggleShow button {
+        width: 100%;
+        height: 75px;
+        position: absolute;
+        top:calc((100% - 75px) / 2);
+        font-size: 0px;
+        padding-left:8px;
+        outline: none;
+        border: none;
+        color:rgb(21, 94, 94);
+    }
+    #toggleShow button:hover {
+        background-color:rgb(21, 94, 94);
+        color: #fff;
+    }
+    #toggleShow button span {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+        margin-left: -20px;
+    }
+
+    .eingabe-titel {
+        font-weight: bold;
+        font-size: 110%;
+    }
+
+    input {
+        outline: none;
+        border:none;
+        padding: 5px;
+        width: 100%;
+        margin:5px;
+    }
+
+    button:not(#toggleShow button) {
+        width: calc(100% - 20px - 30px - 25px);
+        padding:15px;
+        border: none;
+        outline:none;
+        margin: 5px 10px 15px 10px;
+        left: 5%;
+        position: absolute;
+
+        bottom:0;
+    }
+    button:hover:not(#toggleShow button) {
+        transition-duration: 0.3s;
+        background-color:rgb(21, 94, 94);
+        color: white;
+        border-radius: 3px;
+    }
+    input:hover {
+        transition-duration: 0.4s;
+        background-color:rgba(255, 255, 255, 0.5);
+        color: white;
+        border-radius: 3px;
+        
+    }
+    input, input:focus {
+        font-size: 100%;
+    }
+}
+@media screen and (max-width: 425px){
+    body {
+        background: #000;
+    }
+}
+
+*{
+    font-family: 'Yaldevi', sans-serif;
+    /* font-size:110%; */
+}    
+
 html, body {
     margin:0;
     padding:0;
     max-height:100%;
     max-width:100%;
+    /* background-color: rgba(0,30,50,0.3); */
 }
-
-main {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    width:100%;
-    height:100%;
-}
-
-.ergebniss {
-    display: float;
-    width:80%;
-    height:100%;
-    margin:0;
-    background-color: rgba(37, 36, 36, 0.8);
-    font-size:150%;
-    color: #fff;
-}
-.eingabe {
-    background-color: #0a5b9e;
-    display:absolute;
-    width: 30%;
-    max-height:100%;
-    margin:0; 
-    padding:15px;     
-
-    font-size:150%;
-    color: #fff;
-
-}
-
-.eingabe input {
-    float: right;
-    height:20px;
-}
-
-.eingabe label {
-    float: left;
-    height:20px;
-    padding:5px;
-}
-
-Button {
-    padding: 10px 20px;
-    margin-top:20px;
-    color: #fff;
-    background:none;
-}
-
-
