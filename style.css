@@ -34,7 +34,7 @@
         font-size: 110%;
     }
     .item {
-        width: 50%;
+        /* width: 50%; */
     }
     canvas { 
         position:fixed;

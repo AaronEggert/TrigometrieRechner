@@ -284,12 +284,14 @@ function WaSaSb(Wa,a,b) {
     document.getElementById("erg-seite-a").innerHTML    += a + " (Eingabe)";
     document.getElementById("erg-seite-b").innerHTML    += b + " (Eingabe)";
     document.getElementById("erg-seite-c").innerHTML    += Sc;
-
-    document.getElementById("erg-winkel-a-rechnung").innerHTML = `&alpha; = ${Wa}`;
-    document.getElementById("erg-winkel-b-rechnung").innerHTML = `sin &alpha; / a = sin &beta; / b<br/>sin${Wa}° / ${a} = sin &beta; / ${b} | * ${b}<br/>${b} * (sin${Wa}° / ${a}) = sin &beta;<br/> ${ b * ( tri.Sin(Wa) / a)} = sin &beta; | shift sin<br/>${Math.asin( b * ( tri.Sin(Wa) / a)) * 180 / Math.PI} = &beta;`;
+    var j1 = JSON.parse(`{"rechnungen": [{"colums": [{"typeof": "p","text": "(Eingabe)"}]},{"colums": [{"typeof": "p","text": "&alpha; = ${Wa.toString()}"}]}]}`);
+    var j2 = JSON.parse(`{"rechnungen": [{"colums": [{"typeof": "bruch","bruch": {"top":"sin &alpha;", "bottom": "a"}},{"typeof":"p","text":"="},{"typeof": "bruch","bruch": {"top":"sin &beta;", "bottom": "b"}}]},{"colums": [{"typeof": "bruch","bruch": {"top":"sin${Wa}°","bottom":"${a}"}},{"typeof":"p","text":"="},{"typeof":"bruch","bruch":{"top":"sin &beta;","bottom":"${b}"}}]}]}`);
+    document.getElementById("erg-winkel-a-rechnung").appendChild(CreateBruch(j1));
+    // document.getElementById("erg-winkel-b-rechnung").innerHTML = `sin &alpha; / a = sin &beta; / b<br/>sin${Wa}° / ${a} = sin &beta; / ${b} | * ${b}<br/>${b} * (sin${Wa}° / ${a}) = sin &beta;<br/> ${ b * ( tri.Sin(Wa) / a)} = sin &beta; | shift sin<br/>${Math.asin( b * ( tri.Sin(Wa) / a)) * 180 / Math.PI} = &beta;`;
+    document.getElementById("erg-winkel-b-rechnung").appendChild(CreateBruch(j2));
     document.getElementById("erg-winkel-c-rechnung").innerHTML = `180° - &alpha; - &beta; = &gamma;<br/>180° - ${Wa}° - ${Wb}° = ${Wc}°`;
-    document.getElementById("erg-seite-a-rechnung").innerHTML  = "test";
-    document.getElementById("erg-seite-b-rechnung").innerHTML  = "test";
+    document.getElementById("erg-seite-a-rechnung").innerHTML  = `Eingabe: a = ${a}`;
+    document.getElementById("erg-seite-b-rechnung").innerHTML  = `Eingabe: b = ${b}`;
     document.getElementById("erg-seite-c-rechnung").innerHTML  = "test";
 
 
@@ -447,3 +449,101 @@ var switchIt = {
 //     var element = document.getElementById("toggleShow");
 //     // element.delete();
 // }
+
+
+
+function CreateBruch(eingabe) {
+    var tb_rechnung = document.createElement("table");
+    tb_rechnung.classList.add("rechnung");
+
+    var eingabe_rechnungen = eingabe["rechnungen"];
+
+    for (let i = 0; i < eingabe_rechnungen.length; i++) {
+        var tr      = document.createElement("tr"),
+            colums  = eingabe_rechnungen[i].colums;
+        
+        for (let i = 0; i < colums.length; i++) {
+            var td      = document.createElement("td"),
+                colum   = colums[i],
+                type  = colum["typeof"];
+
+            switch(type) {
+                case "p":
+                    var p = document.createElement("p");
+                        p.innerHTML = colum["text"];
+                        td.appendChild(p);
+                    break;
+
+                case "bruch":
+                    var tb = document.createElement("table");
+                    tb.classList.add("bruch");
+                    var tr_r1 = document.createElement("tr");
+                    var tr_r2 = document.createElement("tr");
+                    tr_r1.classList.add("zähler");
+                    tr_r2.classList.add("nenner");
+                    
+                    var td1 = document.createElement("td")
+                        // td.appendChild("zähler");
+                        // td.innerHTML = "test";
+                    td1.innerHTML = colum["bruch"]["top"];
+                
+                    tr_r1.appendChild(td1);
+                
+                    var td2 = document.createElement("td")
+                        // td1.appendChild("nenner");
+                    td2.innerHTML = colum["bruch"]["bottom"];
+                    tr_r2.appendChild(td2);
+                
+                    tb.appendChild(tr_r1);
+                    tb.appendChild(tr_r2);
+
+                    td.appendChild(tb);
+                    break;
+            }
+            
+
+            tr.appendChild(td);
+        }
+
+        
+        tb_rechnung.appendChild(tr);
+    }
+
+    return tb_rechnung;
+}
+
+
+
+
+var parse = '{"rechnungen": [{"colums": [{"typeof": "bruch","bruch": {"top": "sin alpha","bottom": "a"}},{"typeof": "p","text": "="},{"typeof": "bruch","bruch": {"top": "sin beta","bottom": "b"}},{"typeof": "p","text": "= 124 * 244 / 21.34"}]}]}';
+var json = JSON.parse(parse);
+document.getElementsByClassName("item")[0].appendChild(CreateBruch(json));
+console.log(json);
+
+
+/*
+
+{
+    "rechnungen": [
+        {
+            "colums": [
+                {
+                    "typeof": "p" | "bruch" | "html" (blank),
+                    
+                    // if html or p
+                    "text": "test",
+    
+                    "bruch": {
+                        "top": "on Top",
+                        "bottom": "on Bottom"
+                    }
+    
+    
+    
+                }
+            ]
+        }
+    ]
+}
+
+*/

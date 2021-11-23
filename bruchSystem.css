@@ -1,0 +1,28 @@
+.rechnung {
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    margin:4px;
+    padding: 3px 10px;
+}
+.rechnung * {
+    font-size: 90%;
+    margin: 0;
+    text-align: center;
+}
+
+.rechnung td{
+    padding: 4px;
+}
+.bruch {
+    text-align: center;
+    font-size: 90%;
+
+}
+.zähler {
+    text-align: center;
+}
+
+.nenner td {
+    border-top: 3px solid;
+    text-align: center;
+}
