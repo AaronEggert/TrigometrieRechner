@@ -1,0 +1,34 @@
+{
+    "rechnungen": [
+        {
+            "colums": [
+                {
+                    "typeof": "bruch",    
+                    "bruch": {
+                        "top": "sin alpha",
+                        "bottom": "a"
+                    }
+                },
+                {
+                    "typeof": "p",
+                    "text": "="
+                },
+                {
+                    "typeof": "bruch",    
+                    "bruch": {
+                        "top": "sin beta",
+                        "bottom": "b"
+                    }
+                }
+            ]
+        },
+        {
+            "colums": [
+                {
+                    "typeof": "p",
+                    "text": "a = 1" 
+                }
+            ]
+        }
+    ]
+}
