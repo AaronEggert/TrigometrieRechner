@@ -29,7 +29,7 @@ var tri = {
 var calc = {
     Start: function () {
 
-        switchIt.Switch();
+        // switchIt.Switch();
 
         document.getElementById("erg-winkel-a").innerHTML   = "&alpha; = ";
         document.getElementById("erg-winkel-b").innerHTML   = "&beta; = ";
@@ -274,9 +274,9 @@ function WaSaSb(Wa,a,b) {
     //Sb * -- = Wb 
     //     Sa   
 
-    var Wb = Math.asin(b * ( tri.Sin(Wa) / a)) * 180 / Math.PI;
+    var Wb = Math.round(Math.asin(b * ( tri.Sin(Wa) / a)) * 180 / Math.PI * 10000) / 10000;
     var Wc = 180 - Wa - Wb;
-    var Sc = tri.Sin(Wc) * (a / tri.Sin(Wa));
+    var Sc = Math.round(tri.Sin(Wc) * (a / tri.Sin(Wa)) * 10000) / 10000;
 
     document.getElementById("erg-winkel-a").innerHTML   += Wa + " (Eingabe)";
     document.getElementById("erg-winkel-b").innerHTML   += Wb;
@@ -285,14 +285,22 @@ function WaSaSb(Wa,a,b) {
     document.getElementById("erg-seite-b").innerHTML    += b + " (Eingabe)";
     document.getElementById("erg-seite-c").innerHTML    += Sc;
     var j1 = JSON.parse(`{"rechnungen": [{"colums": [{"typeof": "p","text": "(Eingabe)"}]},{"colums": [{"typeof": "p","text": "&alpha; = ${Wa.toString()}"}]}]}`);
-    var j2 = JSON.parse(`{"rechnungen": [{"colums": [{"typeof": "bruch","bruch": {"top":"sin &alpha;", "bottom": "a"}},{"typeof":"p","text":"="},{"typeof": "bruch","bruch": {"top":"sin &beta;", "bottom": "b"}}]},{"colums": [{"typeof": "bruch","bruch": {"top":"sin${Wa}°","bottom":"${a}"}},{"typeof":"p","text":"="},{"typeof":"bruch","bruch":{"top":"sin &beta;","bottom":"${b}"}}]}]}`);
+var j2 = JSON.parse(`{"rechnungen": [{"colums": [{"typeof": "bruch","bruch": {"top":"sin &alpha;", "bottom": "a"}},{"typeof":"p","text":"="},{"typeof": "bruch","bruch": {"top":"sin &beta;", "bottom": "b"}}]},{"colums": [{"typeof": "bruch","bruch": {"top":"sin${Wa}°","bottom":"${a}"}},{"typeof":"p","text":"="},{"typeof":"bruch","bruch":{"top":"sin &beta;","bottom":"${b}"}},{"typeof":"p","text":"  | * ${b}"}]},{"colums": [{"typeof":"p","text":"${b}"},{"typeof":"p","text":"*"},{"typeof":"bruch","bruch":{"top":"sin${Wa}°","bottom":"${a}"}},{"typeof":"p","text":"="},{"typeof":"p","text":"sin &beta;"},{"typeof":"p","text":"  | shit sin"}]},{"colums":[{"typeof":"p","text":"${Wb}°"},{"typeof":"p","text":"="},{"typeof":"p","text":"&beta;"}]}]}`);
+    var j3 = JSON.parse(`{"rechnungen": [{"colums": [{"typeof": "p","text": "180°"},{"typeof": "p","text": "-"},{"typeof": "p","text": "&alpha;"},{"typeof": "p","text": "-"},{"typeof": "p","text": "&beta;"},{"typeof": "p","text": "="},{"typeof": "p","text": "&gamma;"}]},{"colums":[{"typeof": "p","text": "180°"},{"typeof": "p","text": "-"},{"typeof": "p","text": "${Wa}"},{"typeof": "p","text": "-"},{"typeof": "p","text": "${Wb}"},{"typeof": "p","text": "="},{"typeof": "p","text": "${Wc}"}]}]}`);
+    var j4 = JSON.parse(`{"rechnungen": [{"colums": [{"typeof": "p","text": "(Eingabe)"}]},{"colums": [{"typeof": "p","text": "a = ${a.toString()}"}]}]}`);
+    var j5 = JSON.parse(`{"rechnungen": [{"colums": [{"typeof": "p","text": "(Eingabe)"}]},{"colums": [{"typeof": "p","text": "b = ${b.toString()}"}]}]}`);
+    var j6 = JSON.parse(`{"rechnungen": [{"colums": [{"typeof": "p","text": "Coming"}]},{"colums": [{"typeof": "p","text": "soon"}]}]}`);
+    
     document.getElementById("erg-winkel-a-rechnung").appendChild(CreateBruch(j1));
     // document.getElementById("erg-winkel-b-rechnung").innerHTML = `sin &alpha; / a = sin &beta; / b<br/>sin${Wa}° / ${a} = sin &beta; / ${b} | * ${b}<br/>${b} * (sin${Wa}° / ${a}) = sin &beta;<br/> ${ b * ( tri.Sin(Wa) / a)} = sin &beta; | shift sin<br/>${Math.asin( b * ( tri.Sin(Wa) / a)) * 180 / Math.PI} = &beta;`;
     document.getElementById("erg-winkel-b-rechnung").appendChild(CreateBruch(j2));
-    document.getElementById("erg-winkel-c-rechnung").innerHTML = `180° - &alpha; - &beta; = &gamma;<br/>180° - ${Wa}° - ${Wb}° = ${Wc}°`;
-    document.getElementById("erg-seite-a-rechnung").innerHTML  = `Eingabe: a = ${a}`;
-    document.getElementById("erg-seite-b-rechnung").innerHTML  = `Eingabe: b = ${b}`;
-    document.getElementById("erg-seite-c-rechnung").innerHTML  = "test";
+    document.getElementById("erg-winkel-c-rechnung").appendChild(CreateBruch(j3));
+    // document.getElementById("erg-winkel-c-rechnung").innerHTML = `180° - &alpha; - &beta; = &gamma;<br/>180° - ${Wa}° - ${Wb}° = ${Wc}°`;
+    // document.getElementById("erg-seite-a-rechnung").innerHTML  = `Eingabe: a = ${a}`;
+    // document.getElementById("erg-seite-b-rechnung").innerHTML  = `Eingabe: b = ${b}`;
+    document.getElementById("erg-seite-a-rechnung").appendChild(CreateBruch(j4));
+    document.getElementById("erg-seite-b-rechnung").appendChild(CreateBruch(j5));
+    document.getElementById("erg-seite-c-rechnung").appendChild(CreateBruch(j6));
 
 
     console.log(Wb,Wc,Sc);
@@ -517,7 +525,7 @@ function CreateBruch(eingabe) {
 
 var parse = '{"rechnungen": [{"colums": [{"typeof": "bruch","bruch": {"top": "sin alpha","bottom": "a"}},{"typeof": "p","text": "="},{"typeof": "bruch","bruch": {"top": "sin beta","bottom": "b"}},{"typeof": "p","text": "= 124 * 244 / 21.34"}]}]}';
 var json = JSON.parse(parse);
-document.getElementsByClassName("item")[0].appendChild(CreateBruch(json));
+// document.getElementsByClassName("item")[0].appendChild(CreateBruch(json));
 console.log(json);
 
 
